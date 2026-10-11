@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#172018"><title>Khu Vườn Tâm Thức — Một nơi để trở về</title>
+<style>
+:root{color-scheme:dark;--cream:#fff8e9;--gold:#d8bd79}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#172018;font-family:Georgia,'Times New Roman',serif;color:var(--cream)}
+#scene,#shade{position:fixed;inset:0;width:100%;height:100%}#scene{object-fit:cover;opacity:1;transition:opacity 1.8s ease}#shade{background:linear-gradient(180deg,rgba(7,14,9,.18),rgba(7,14,9,.08) 42%,rgba(7,14,9,.48));pointer-events:none}
+#brand{position:fixed;left:50%;top:9%;transform:translate(-50%,-8px);width:min(210px,42vw);text-align:center;opacity:0;transition:opacity 2.4s ease,transform 2.4s ease}#brand.visible{opacity:1;transform:translate(-50%,0)}#brand img{width:100%;height:auto;max-height:30vh;object-fit:contain;filter:drop-shadow(0 2px 12px #0007)}
+#tagline{position:fixed;top:39%;left:50%;transform:translate(-50%,8px);font-size:clamp(17px,2.8vw,25px);letter-spacing:.08em;text-align:center;white-space:nowrap;opacity:0;transition:opacity 2s ease,transform 2s ease;text-shadow:0 2px 14px #000}#tagline.visible{opacity:1;transform:translate(-50%,0)}
+#paths{position:fixed;left:0;right:0;bottom:max(7vh,32px);display:flex;justify-content:center;align-items:center;gap:clamp(14px,4vw,58px);padding:0 16px;opacity:0;transform:translateY(8px);transition:opacity 2s ease,transform 2s ease;flex-wrap:wrap}#paths.visible{opacity:1;transform:translateY(0)}#paths a{color:var(--cream);text-decoration:none;font-size:clamp(12px,1.6vw,17px);letter-spacing:.12em;text-shadow:0 2px 12px #000;white-space:nowrap;border-bottom:1px solid transparent;padding:7px 0;transition:border-color .3s,color .3s}#paths a:hover,#paths a:focus{color:#f5dca0;border-color:var(--gold);outline:none}
+#sound{position:fixed;right:18px;top:18px;border:1px solid #ffffff65;background:#14201866;color:white;border-radius:50%;width:42px;height:42px;font-size:17px;cursor:pointer;opacity:0;transition:opacity 1.5s ease}#sound.visible{opacity:.8}#status{position:fixed;left:14px;bottom:12px;font:11px/1.4 system-ui,sans-serif;letter-spacing:.08em;color:#fff9;opacity:0;transition:opacity 1s}#status.visible{opacity:.7}
+@media(max-width:600px){#brand{top:11%;width:min(170px,43vw)}#tagline{top:38%;white-space:normal;width:90%;line-height:1.5}#paths{bottom:max(5vh,22px);gap:12px 20px;max-width:440px;margin:auto}#paths a{font-size:12px;letter-spacing:.08em}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<video id="scene" autoplay muted playsinline preload="auto"></video><div id="shade"></div>
+<div id="brand"><img src="assets/logo.svg" alt="Khu Vườn Tâm Thức"></div>
+<div id="tagline">Một nơi để trở về</div>
+<nav id="paths" aria-label="Năm lối đi trong Khu Vườn">
+<a href="#go-cao">⛰ GÒ CAO</a><a href="#con-suoi">💧 CON SUỐI</a><a href="#ho-nuoc">🌊 HỒ NƯỚC</a><a href="#vuon-hoa">🌸 VƯỜN HOA</a><a href="#hien-nha">🏡 HIÊN NHÀ</a>
+</nav><button id="sound" aria-label="Bật âm thanh tự nhiên" title="Bật âm thanh tự nhiên">🔇</button><div id="status"></div>
+<script>
+const groups={
+ sang:['media/sang/gate-01.mp4','media/sang/gate-02.mp4','media/sang/gate-03.mp4','media/sang/gate-04.mp4','media/sang/gate-05.mp4'],
+ trua:['media/trua/gate-01.mp4','media/trua/gate-02.mp4','media/trua/gate-03.mp4','media/trua/gate-04.mp4','media/trua/gate-05.mp4'],
+ chieu:['media/chieu/gate-01.mp4','media/chieu/gate-02.mp4','media/chieu/gate-03.mp4','media/chieu/gate-04.mp4','media/chieu/gate-05.mp4'],
+ toi:['media/toi/gate-01.mp4','media/toi/gate-02.mp4','media/toi/gate-03.mp4','media/toi/gate-04.mp4','media/toi/gate-05.mp4']};
+const names={sang:'SÁNG',trua:'TRƯA',chieu:'CHIỀU',toi:'TỐI'};
+const video=document.querySelector('#scene'),brand=document.querySelector('#brand'),tagline=document.querySelector('#tagline'),paths=document.querySelector('#paths'),sound=document.querySelector('#sound'),status=document.querySelector('#status');
+let currentGroup='',currentSrc='',soundOn=false,usedByGroup={sang:[],trua:[],chieu:[],toi:[]},rotationTimer;
+function getGroup(){const h=new Date().getHours();return h>=5&&h<10?'sang':h>=10&&h<14?'trua':h>=14&&h<18?'chieu':'toi'}
+function choose(group){let choices=groups[group].filter(src=>src!==currentSrc&&!usedByGroup[group].includes(src));if(!choices.length){usedByGroup[group]=[];choices=groups[group].filter(src=>src!==currentSrc)}const pick=choices[Math.floor(Math.random()*choices.length)];usedByGroup[group].push(pick);return pick}
+function play(src,group){if(!src||src===currentSrc)return;currentSrc=src;currentGroup=group;video.style.opacity='.12';setTimeout(()=>{video.src=src;video.load();const p=video.play();if(p&&p.catch)p.catch(()=>{});},450);status.textContent=names[group]+' · CÁNH CỔNG';}
+video.addEventListener('canplay',()=>{video.style.opacity='1';video.muted=!soundOn;});
+video.addEventListener('ended',()=>{const g=getGroup();play(choose(g),g)});
+video.addEventListener('error',()=>{status.textContent='Đang chờ video tiếp theo…'});
+// Start with the approved Cánh Cổng V1, then enter the current time's group.
+play('media/canh-cong-v1.mp4',getGroup());
+setTimeout(()=>brand.classList.add('visible'),1800);setTimeout(()=>tagline.classList.add('visible'),4200);setTimeout(()=>paths.classList.add('visible'),7600);setTimeout(()=>{sound.classList.add('visible');status.classList.add('visible')},9000);
+// Change group when local Vietnam time crosses into another daypart; refresh pool on every return.
+setInterval(()=>{const g=getGroup();if(g!==currentGroup)play(choose(g),g)},60000);
+sound.addEventListener('click',()=>{soundOn=!soundOn;video.muted=!soundOn;sound.textContent=soundOn?'🔊':'🔇';sound.setAttribute('aria-label',soundOn?'Tắt âm thanh':'Bật âm thanh tự nhiên')});
+// Prototype navigation placeholders: keep the five paths visible without sending users to broken destinations.
+document.querySelectorAll('#paths a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();status.textContent='Lối đi: '+a.textContent.trim()+' · Bản thử nghiệm';setTimeout(()=>status.textContent=names[currentGroup]+' · CÁNH CỔNG',2200)}));
+</script></body></html>
