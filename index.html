@@ -39,7 +39,5 @@ play('media/canh-cong-v1.mp4',getGroup());
 setTimeout(()=>brand.classList.add('visible'),1800);setTimeout(()=>tagline.classList.add('visible'),4200);setTimeout(()=>paths.classList.add('visible'),7600);setTimeout(()=>{sound.classList.add('visible');status.classList.add('visible')},9000);
 // Change group when local Vietnam time crosses into another daypart; refresh pool on every return.
 setInterval(()=>{const g=getGroup();if(g!==currentGroup)play(choose(g),g)},60000);
-sound.addEventListener('click',()=>{soundOn=!soundOn;video.muted=!soundOn;sound.textContent=soundOn?'🔊':'🔇';sound.setAttribute('aria-label',soundOn?'Tắt âm thanh':'Bật âm thanh tự nhiên')});
-// Prototype navigation placeholders: keep the five paths visible without sending users to broken destinations.
-document.querySelectorAll('#paths a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();status.textContent='Lối đi: '+a.textContent.trim()+' · Bản thử nghiệm';setTimeout(()=>status.textContent=names[currentGroup]+' · CÁNH CỔNG',2200)}));
+sound.addEventListener('click',()=>{soundOn=!soundOn;video.muted=!soundOn;sound.textContent=soundOn?'🔊':'🔇';sound.setAttribute('aria-label',soundOn?'Tắt âm thanh':'Bật âm thanh tự 
 </script></body></html>
