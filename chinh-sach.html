@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eee9dc">
+<meta name="description" content="Chính sách, quyền riêng tư, miễn trừ trách nhiệm và bản quyền tại Khu Vườn Tâm Thức.">
+<title>Chính sách &amp; miễn trừ — Khu Vườn Tâm Thức</title>
+<style>
+:root{--paper:#f4f0e6;--ink:#514d40;--muted:#827d6d;--line:#dcd5c5;--green:#405640;--gold:#9b8955;--soft:#eae4d6}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#e1ddcf;color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+.top{height:52px;display:flex;align-items:center;justify-content:center;position:relative;color:#716d5e;font:10px system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:0 130px 0 12px}
+.home-link{position:absolute;right:clamp(12px,4vw,34px);top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;justify-content:center;min-height:31px;padding:0 12px;border:1px solid #b9ad91;border-radius:18px;background:#f6f2e8;color:var(--green);text-decoration:none;font:10px system-ui,sans-serif;letter-spacing:0;text-transform:none;white-space:nowrap;box-shadow:0 2px 7px #44351c12}
+.book-wrap{min-height:calc(100vh - 120px);display:flex;align-items:center;justify-content:center;padding:10px 18px 18px}
+.spread{width:min(1080px,100%);height:min(760px,calc(100vh - 170px));min-height:520px;display:grid;grid-template-columns:1fr 1fr;filter:drop-shadow(0 15px 24px #4035221c)}
+.page{position:relative;overflow:hidden;background:var(--paper);padding:clamp(30px,4.6vw,58px) clamp(25px,4.8vw,56px);box-shadow:inset 0 0 24px #887b5b0b;display:flex;flex-direction:column}
+.page:first-child{border-right:1px solid #ddd5c5}.page:last-child{border-left:1px solid #e7e0d2}
+.page:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#8c79500d,transparent 12%,transparent 88%,#8c79500d)}
+.page:after{content:"";position:absolute;inset:8px;pointer-events:none;border:1px solid #b6a98735}
+.page-inner{position:relative;z-index:1;overflow:auto;scrollbar-width:thin;scrollbar-color:#c9bea9 transparent;height:100%;padding:2px 3px 12px}
+.kicker{font:10px/1.6 system-ui,sans-serif;letter-spacing:.19em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.page h1{font-size:clamp(27px,3.2vw,42px);line-height:1.25;font-weight:normal;letter-spacing:.025em;color:#f4efdf;margin:0 0 17px}
+.page h2{font-size:clamp(21px,2.4vw,29px);font-weight:normal;line-height:1.35;color:var(--green);margin:0 0 13px}
+.page h3{font-size:17px;font-weight:normal;line-height:1.4;color:#6c674f;margin:22px 0 8px}
+.page p,.page li{font-size:clamp(14px,1.25vw,16px);line-height:1.8;margin:0 0 12px}
+.page ul{padding-left:21px;margin:4px 0 15px}.page li{padding-left:3px;margin-bottom:5px}
+.page .lead{font-size:clamp(16px,1.5vw,18px);line-height:1.9;color:#625e4e}
+.page .small{font-size:12px;line-height:1.7;color:var(--muted)}
+.page .rule{width:54px;height:1px;background:var(--gold);margin:19px auto}
+.number{position:absolute;bottom:15px;left:0;right:0;text-align:center;color:#a69b86;font:10px system-ui,sans-serif;letter-spacing:.12em;z-index:2}
+.cover{justify-content:center;text-align:center;padding:clamp(35px,6vw,75px);background:linear-gradient(155deg,#53664c,#344637 72%,#29392e);color:#f4efdf}
+.cover:before{background:radial-gradient(ellipse at 50% 25%,#ffffff12,transparent 55%)}
+.cover:after{border-color:#d8c99a55;inset:14px}
+.cover .cover-inner{position:relative;z-index:1}
+.cover .kicker{color:#d5c69b;margin-bottom:24px}
+.cover .subtitle{font-style:italic;font-size:16px;line-height:1.8;color:#e6dfcc}
+.cover .ornament{font-size:25px;color:#c5ad70;margin:0 0 20px}
+.cover .rule{background:#bba66e}
+.back{justify-content:center;text-align:center}
+.back h2{letter-spacing:.08em}.back p{font-style:italic;color:#77715f}
+.nav{height:58px;display:flex;justify-content:center;align-items:center;gap:24px;color:#716a59;font:11px system-ui,sans-serif;letter-spacing:.06em}
+button{border:1px solid #bcb19d;background:#f0eadc;color:#536047;border-radius:50%;width:38px;height:38px;font-size:19px;cursor:pointer}
+button:disabled{opacity:.3;cursor:default}#count{min-width:90px;text-align:center}
+.hint{text-align:center;color:#938a78;font:10px system-ui,sans-serif;letter-spacing:.04em;padding:0 12px 13px}
+@media(max-width:650px){.top{height:44px;padding-right:112px;font-size:9px}.home-link{right:10px;font-size:9px;min-height:28px;padding:0 9px}.book-wrap{min-height:calc(100vh - 105px);padding:4px 10px 10px}.spread{display:block;width:100%;height:min(790px,calc(100dvh - 150px));min-height:480px}.page{height:100%;padding:37px 29px 48px;border:0!important}.page:nth-child(2){display:none}.page h2{font-size:24px}.page p,.page li{font-size:15px;line-height:1.82}.nav{height:54px;gap:20px}.hint{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top"><span>Khu Vườn Tâm Thức</span><a class="home-link" href="https://khuvuontamthuc.com/">Về trang chủ</a></div>
+<main class="book-wrap"><div class="spread" id="spread" aria-live="polite"></div></main>
+<div class="nav"><button id="prev" aria-label="Trang trước">‹</button><span id="count">Bìa</span><button id="next" aria-label="Trang sau">›</button></div>
+<div class="hint" id="hint">Vuốt sang trái hoặc phải để lật trang</div>
+<script>
+const PAGES = [
+ {type:'cover',title:'CHÍNH SÁCH & MIỄN TRỪ',subtitle:'Những nguyên tắc minh bạch cho một không gian chia sẻ tri thức.',kicker:'KHU VƯỜN TÂM THỨC'},
+ {title:'Lời ngỏ',kicker:'MỞ ĐẦU',html:`<p class="lead">Khu Vườn Tâm Thức được tạo ra như một không gian chia sẻ sách, tri thức, suy tưởng và những góc nhìn về hành trình nhận thức của con người.</p><p>Chúng tôi mong muốn khu vườn là nơi người đọc có thể dừng lại, tự do tìm hiểu và suy ngẫm. Để không gian ấy được gìn giữ bằng sự tin cậy, trang này trình bày những nguyên tắc cơ bản về nội dung, quyền riêng tư, bản quyền và trách nhiệm khi sử dụng website.</p><p>Các chính sách dưới đây cần được đọc cùng với cách website thực tế vận hành và được cập nhật khi hoạt động của khu vườn thay đổi.</p>`},
+ {title:'1. Nguyên tắc hoạt động',kicker:'NỀN TẢNG',html:`<p>Khu Vườn Tâm Thức hướng đến việc chia sẻ tri thức và tác phẩm vì mục đích đọc, học hỏi, suy ngẫm và lan tỏa những giá trị tinh thần.</p><p>Các nội dung được trình bày như những góc nhìn để tham khảo, không phải mệnh lệnh, khuôn mẫu hay chân lý duy nhất.</p><p>Người đọc được khuyến khích tiếp nhận có chọn lọc, đối chiếu với những nguồn tin đáng tin cậy và tự hình thành nhận định của mình.</p>`},
+ {title:'2. Chính sách quyền riêng tư',kicker:'DỮ LIỆU & QUYỀN RIÊNG TƯ',html:`<p>Khu Vườn Tâm Thức tôn trọng quyền riêng tư của người truy cập. Chúng tôi không yêu cầu người đọc cung cấp thông tin cá nhân chỉ để xem và đọc những nội dung công khai trên website.</p><p>Nếu website có biểu mẫu liên hệ, diễn đàn, tính năng bình luận hoặc dịch vụ bên ngoài, thông tin người dùng tự nguyện cung cấp có thể được xử lý nhằm vận hành tính năng tương ứng và phản hồi yêu cầu.</p><p>Website hoặc đơn vị cung cấp dịch vụ lưu trữ có thể ghi nhận một số dữ liệu kỹ thuật cần thiết để bảo đảm an ninh, duy trì hoạt động và khắc phục lỗi. Phạm vi dữ liệu thực tế phụ thuộc cấu hình máy chủ và các dịch vụ đang được sử dụng.</p><p>Chúng tôi không chủ ý mua bán dữ liệu cá nhân của người truy cập. Trước khi triển khai công cụ phân tích, quảng cáo, cookie không thiết yếu hoặc dịch vụ thu thập dữ liệu khác, chính sách này cần được cập nhật để mô tả rõ mục đích và cách thức xử lý.</p>`},
+ {title:'3. Miễn trừ trách nhiệm về nội dung',kicker:'THÔNG TIN THAM KHẢO',html:`<p>Các bài viết, sách và tài liệu trên website phản ánh quan điểm, trải nghiệm hoặc kết quả nghiên cứu của tác giả tại thời điểm biên soạn. Nội dung có thể chưa đầy đủ, có thể thay đổi theo thời gian và không nhất thiết phù hợp với mọi hoàn cảnh.</p><p>Thông tin trên website chỉ nhằm mục đích cung cấp kiến thức và khuyến khích suy ngẫm; không thay thế tư vấn cá nhân từ chuyên gia có đủ năng lực trong các lĩnh vực y tế, sức khỏe tâm thần, pháp lý, tài chính hoặc lĩnh vực chuyên môn khác.</p><p>Người đọc cần tự kiểm chứng thông tin quan trọng và cân nhắc hoàn cảnh riêng trước khi áp dụng. Không nên trì hoãn việc tìm kiếm sự trợ giúp chuyên môn chỉ vì đã đọc nội dung trên website.</p>`},
+ {title:'4. Trách nhiệm khi sử dụng',kicker:'SỬ DỤNG CÓ Ý THỨC',html:`<p>Người truy cập chịu trách nhiệm đối với cách mình diễn giải, sử dụng và chia sẻ thông tin từ website.</p><p>Trong phạm vi pháp luật cho phép, Khu Vườn Tâm Thức không bảo đảm website luôn hoạt động liên tục, không có lỗi hoặc mọi nội dung luôn đáp ứng một mục đích sử dụng cụ thể.</p><p>Không điều khoản nào trong thông báo này nhằm loại trừ hoặc hạn chế trách nhiệm mà pháp luật không cho phép loại trừ hoặc hạn chế.</p>`},
+ {title:'5. Bản quyền & quyền sử dụng',kicker:'TÔN TRỌNG TÁC QUYỀN',html:`<p>Các tác phẩm, bài viết, hình ảnh, thiết kế và tài liệu sáng tạo trên website thuộc quyền của tác giả hoặc chủ sở hữu hợp pháp tương ứng, trừ khi có ghi chú khác.</p><p>Việc một cuốn sách hoặc tài liệu được chia sẻ miễn phí trên Khu Vườn Tâm Thức không đồng nghĩa với việc tác giả từ bỏ quyền tác giả, hoặc cho phép người khác khai thác thương mại, sửa đổi hay phân phối lại trái với quyền của chủ sở hữu.</p><p>Khi trích dẫn hoặc chia sẻ nội dung, vui lòng ghi rõ tên tác giả và nguồn, giữ nguyên ý nghĩa, đồng thời tuân thủ quy định pháp luật về sở hữu trí tuệ. Với mục đích sử dụng vượt quá phạm vi được pháp luật cho phép, cần có sự đồng ý của chủ sở hữu quyền.</p><p>Nếu bạn cho rằng nội dung trên website sử dụng tác phẩm thuộc quyền của mình mà chưa phù hợp, vui lòng liên hệ để chúng tôi xem xét.</p>`},
+ {title:'6. Liên kết bên ngoài',kicker:'TÀI NGUYÊN THAM KHẢO',html:`<p>Website có thể dẫn đến các trang hoặc dịch vụ do bên thứ ba vận hành nhằm giúp người đọc tham khảo thêm thông tin.</p><p>Khu Vườn Tâm Thức không kiểm soát toàn bộ nội dung, tính sẵn có, chính sách quyền riêng tư hoặc hoạt động của các trang bên ngoài. Việc đặt liên kết không đồng nghĩa với sự bảo chứng cho mọi nội dung tại đó.</p><p>Người truy cập nên tự xem xét điều khoản và chính sách của từng dịch vụ trước khi cung cấp thông tin hoặc sử dụng dịch vụ đó.</p>`},
+ {title:'7. Cập nhật chính sách',kicker:'HIỆU LỰC & ĐIỀU CHỈNH',html:`<p>Chính sách này có thể được điều chỉnh để phản ánh thay đổi trong hoạt động của website, tính năng mới hoặc yêu cầu pháp luật.</p><p>Phiên bản được đăng tải trên trang này là phiên bản hiện hành. Khi có thay đổi đáng kể, chúng tôi sẽ cập nhật nội dung tại đây và điều chỉnh ngày cập nhật ở cuối trang.</p><p class="small">Ngày cập nhật: 14 tháng 11 năm 2026</p>`},
+ {type:'back',title:'Khu Vườn Tâm Thức',html:`<p>Một khoảng xanh dành cho những ai muốn dừng lại, đọc và suy ngẫm.</p><div class="rule"></div><p class="small">Minh bạch trong cách hoạt động.<br>Tôn trọng quyền riêng tư.<br>Tôn trọng tác quyền.<br>Không áp đặt người đọc.</p>`}
+];
+const spread=document.getElementById('spread'),count=document.getElementById('count'),prev=document.getElementById('prev'),next=document.getElementById('next');
+let index=0,touchX=null;const mobile=()=>window.matchMedia('(max-width:650px)').matches;
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function markup(p,n){if(p.type==='cover')return `<article class="page cover"><div class="cover-inner"><div class="ornament">✦</div><div class="kicker">${esc(p.kicker)}</div><h1>${esc(p.title)}</h1><div class="rule"></div><div class="subtitle">${esc(p.subtitle)}</div></div></article>`;if(p.type==='back')return `<article class="page back"><div class="page-inner"><h2>${esc(p.title)}</h2>${p.html||''}</div><div class="number">${n}</div></article>`;return `<article class="page"><div class="page-inner"><div class="kicker">${esc(p.kicker)}</div><h2>${esc(p.title)}</h2>${p.html||''}</div><div class="number">${n}</div></article>`;}
+function render(){const m=mobile(),right=index+1;spread.innerHTML=markup(PAGES[index],index)+(!m&&right<PAGES.length?markup(PAGES[right],right):'');count.textContent=index===0?'Bìa':`${index}${!m&&right<PAGES.length?'–'+right:''} / ${PAGES.length-1}`;prev.disabled=index===0;next.disabled=index>=PAGES.length-1;document.getElementById('hint').textContent=m?'Vuốt hoặc chạm mũi tên để lật trang':'Lật từng trang · Máy tính hiển thị hai trang mở';}
+function forward(){if(index<PAGES.length-1){index=Math.min(index+(mobile()?1:2),PAGES.length-1);render();}}
+function backward(){if(index>0){index=Math.max(0,index-(mobile()?1:2));render();}}
+prev.addEventListener('click',backward);next.addEventListener('click',forward);spread.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX},{passive:true});spread.addEventListener('touchend',e=>{if(touchX===null)return;const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45){dx<0?forward():backward();}touchX=null},{passive:true});window.addEventListener('resize',render);document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')forward();if(e.key==='ArrowLeft')backward();});render();
+</script>
+</body>
+</html>
