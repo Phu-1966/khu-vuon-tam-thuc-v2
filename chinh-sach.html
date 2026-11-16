@@ -12,6 +12,35 @@
 body{margin:0;min-height:100vh;background:#e1ddcf;color:var(--ink);font-family:Georgia,"Times New Roman",serif}
 .top{height:52px;display:flex;align-items:center;justify-content:center;position:relative;color:#716d5e;font:10px system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:0 130px 0 12px}
 .home-link{position:absolute;right:clamp(12px,4vw,34px);top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;justify-content:center;min-height:31px;padding:0 12px;border:1px solid #b9ad91;border-radius:18px;background:#f6f2e8;color:var(--green);text-decoration:none;font:10px system-ui,sans-serif;letter-spacing:0;text-transform:none;white-space:nowrap;box-shadow:0 2px 7px #44351c12}
+ #policyAudioButton{
+
+  position:absolute;
+
+  left:clamp(12px,4vw,34px);
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  width:32px;
+
+  height:32px;
+
+  padding:0;
+
+  border:1px solid #b9ad91;
+
+  border-radius:50%;
+
+  background:#f6f2e8;
+
+  color:var(--green);
+
+  font:15px system-ui,sans-serif;
+
+  box-shadow:0 2px 7px #44351c12;
+
+}
 .book-wrap{min-height:calc(100vh - 120px);display:flex;align-items:center;justify-content:center;padding:10px 18px 18px}
 .spread{width:min(1080px,100%);height:min(760px,calc(100vh - 170px));min-height:520px;display:grid;grid-template-columns:1fr 1fr;filter:drop-shadow(0 15px 24px #4035221c)}
 .page{position:relative;overflow:hidden;background:var(--paper);padding:clamp(30px,4.6vw,58px) clamp(25px,4.8vw,56px);box-shadow:inset 0 0 24px #887b5b0b;display:flex;flex-direction:column}
@@ -48,7 +77,25 @@ button:disabled{opacity:.3;cursor:default}#count{min-width:90px;text-align:cente
 </style>
 </head>
 <body>
-<div class="top"><span>Khu Vườn Tâm Thức</span><a class="home-link" href="https://khuvuontamthuc.com/">Về trang chủ</a></div>
+<div class="top">
+
+  <button id="policyAudioButton" type="button"
+
+    aria-label="Bật nhạc Cứu cánh"
+
+    aria-pressed="false"
+
+    title="Bật nhạc Cứu cánh">🔇</button>
+
+  <span>Khu Vườn Tâm Thức</span>
+
+  <a class="home-link" href="https://khuvuontamthuc.com/">Về trang chủ</a>
+
+</div>
+
+<audio id="policyAudio" src="cuu-canh-guitar.mp3"
+
+  loop preload="none"></audio>
 <main class="book-wrap"><div class="spread" id="spread" aria-live="polite"></div></main>
 <div class="nav"><button id="prev" aria-label="Trang trước">‹</button><span id="count">Bìa</span><button id="next" aria-label="Trang sau">›</button></div>
 <div class="hint" id="hint">Vuốt sang trái hoặc phải để lật trang</div>
@@ -72,7 +119,60 @@ function markup(p,n){if(p.type==='cover')return `<article class="page cover"><di
 function render(){const m=mobile(),right=index+1;spread.innerHTML=markup(PAGES[index],index)+(!m&&right<PAGES.length?markup(PAGES[right],right):'');count.textContent=index===0?'Bìa':`${index}${!m&&right<PAGES.length?'–'+right:''} / ${PAGES.length-1}`;prev.disabled=index===0;next.disabled=index>=PAGES.length-1;document.getElementById('hint').textContent=m?'Vuốt hoặc chạm mũi tên để lật trang':'Lật từng trang · Máy tính hiển thị hai trang mở';}
 function forward(){if(index<PAGES.length-1){index=Math.min(index+(mobile()?1:2),PAGES.length-1);render();}}
 function backward(){if(index>0){index=Math.max(0,index-(mobile()?1:2));render();}}
-prev.addEventListener('click',backward);next.addEventListener('click',forward);spread.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX},{passive:true});spread.addEventListener('touchend',e=>{if(touchX===null)return;const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45){dx<0?forward():backward();}touchX=null},{passive:true});window.addEventListener('resize',render);document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')forward();if(e.key==='ArrowLeft')backward();});render();
+prev.addEventListener('click',backward);next.addEventListener('click',forward);spread.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX},{passive:true});spread.addEventListener('touchend',e=>{if(touchX===null)return;const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45){dx<0?forward():backward();}touchX=null},{passive:true});window.addEventListener('resize',render);
+document.addEventListener('keydown',e=>{
+
+  if(e.key==='ArrowRight')forward();
+
+  if(e.key==='ArrowLeft')backward();
+
+});
+
+const policyAudio=document.getElementById('policyAudio');
+
+const policyAudioButton=document.getElementById('policyAudioButton');
+
+policyAudio.volume=0.16;
+
+policyAudioButton.addEventListener('click',async()=>{
+
+  if(policyAudio.paused){
+
+    try{
+
+      await policyAudio.play();
+
+      policyAudioButton.textContent='🔊';
+
+      policyAudioButton.setAttribute('aria-pressed','true');
+
+      policyAudioButton.setAttribute('aria-label','Tắt nhạc Cứu cánh');
+
+      policyAudioButton.title='Tắt nhạc Cứu cánh';
+
+    }catch(error){
+
+      console.error('Không thể phát nhạc:',error);
+
+    }
+
+  }else{
+
+    policyAudio.pause();
+
+    policyAudioButton.textContent='🔇';
+
+    policyAudioButton.setAttribute('aria-pressed','false');
+
+    policyAudioButton.setAttribute('aria-label','Bật nhạc Cứu cánh');
+
+    policyAudioButton.title='Bật nhạc Cứu cánh';
+
+  }
+
+});
+
+render();
 </script>
 </body>
 </html>
