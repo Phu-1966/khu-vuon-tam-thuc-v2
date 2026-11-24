@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#e8d9cf"/>
+<title>Vườn cũ thiên thai — Thi Âm</title>
+<style>
+
+:root { --ink:#29312c; --muted:#788078; --paper:#f7f3ee; --line:#e7dfd7; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--paper); color:var(--ink); font-family:Georgia,'Times New Roman',serif; }
+main { width:min(100%,760px); margin:0 auto; padding:clamp(20px,5vw,56px) 22px 64px; }
+header { text-align:center; margin-bottom:34px; }
+.kicker { font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
+h1 { font-weight:normal; letter-spacing:.08em; font-size:clamp(23px,6vw,34px); margin:12px 0 8px; }
+.subtitle { color:var(--muted); font-style:italic; font-size:15px; }
+.cover { display:block; width:min(100%,520px); margin:26px auto 22px; border-radius:3px; box-shadow:0 12px 35px rgba(47,56,49,.10); }
+.player { text-align:center; margin:38px auto 46px; }
+.play-button { width:96px; height:96px; border:0; border-radius:50%; background:#858582; color:#fff; display:inline-flex; align-items:center; justify-content:center; font:38px/1 system-ui,sans-serif; cursor:pointer; box-shadow:0 8px 22px rgba(47,56,49,.12); }
+.play-button:focus-visible { outline:3px solid #315c36; outline-offset:4px; }
+.video { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+.poem { text-align:center; font-size:clamp(18px,4.4vw,23px); line-height:1.95; letter-spacing:.01em; font-style:italic; color:#4B2354; }
+.stanza { margin:0 0 2.2em; white-space:pre-line; }
+.stanza:last-child { margin-bottom:0; }
+footer { margin-top:54px; text-align:center; color:var(--muted); font-size:12px; letter-spacing:.12em; }
+@media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto; } }
+
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="kicker">Thi Âm · Khu Vườn Tâm Thức</div>
+<h1>VƯỜN CŨ THIÊN THAI</h1>
+<div class="subtitle">Nơi thơ tìm thấy tiếng nói của mình</div>
+</header>
+<div class="player">
+<button aria-label="Phát nhạc" aria-pressed="false" class="play-button" id="playButton" type="button">▶</button>
+<video class="video" id="musicVideo" playsinline preload="metadata">
+<source src="Vuon-cu-thien-thai-nhe.mp4" type="video/mp4"/>
+</video>
+</div>
+<script>
+const video = document.getElementById('musicVideo');
+const button = document.getElementById('playButton');
+button.addEventListener('click', async () => {
+  if (video.paused) {
+    try { await video.play(); button.textContent = 'Ⅱ'; button.setAttribute('aria-label', 'Tạm dừng nhạc'); button.setAttribute('aria-pressed', 'true'); }
+    catch (error) { button.textContent = '▶'; button.setAttribute('aria-label', 'Phát nhạc'); button.setAttribute('aria-pressed', 'false'); }
+  } else { video.pause(); button.textContent = '▶'; button.setAttribute('aria-label', 'Phát nhạc'); button.setAttribute('aria-pressed', 'false'); }
+});
+video.addEventListener('ended', () => { button.textContent = '▶'; button.setAttribute('aria-label', 'Phát nhạc'); button.setAttribute('aria-pressed', 'false'); });
+</script>
+<section aria-label="Lời thơ Vườn cũ thiên thai" class="poem">
+<p class="stanza">Sân trước ban mai
+nhẹ nhàng, thanh thoát
+Lá trên cỏ ướt
+vài hạt sương rơi
+Cơn gió bồi hồi
+khu vườn thinh lặng
+Lá xanh, mắt biếc
+mang vào thiên thu.</p>
+<p class="stanza">Bên ô cửa vừa lau sạch
+Cây vẫn đứng khoan dung
+Sáng đón bình minh
+Chiều ngắm nắng tà
+Ru cùng gió
+Hát cùng mưa
+Nó biết rằng
+Chẳng đúng, chẳng sai
+Chẳng khôn, chẳng dại
+Chẳng thành công hay thất bại
+Chẳng công trạng hay tội đồ
+Chẳng hờn, chẳng trách
+Cũng chẳng sang, chẳng hèn
+Hè nóng nực qua đi
+Thu thanh tao lại tới
+Những nỗi đau dịu vợi
+An lành lại theo về
+Ngồi im
+thành thánh địa
+Từ ái
+Một trái tim</p>
+<p class="stanza">Chiều thu mây vẽ lên trời
+Cây đứng đó với nụ cười an nhiên
+Lá xanh lá khẽ rơi vàng
+Bao mưa nắng với mây hồng cũng theo
+Biết rằng chẳng thấp chẳng cao
+Chẳng dơ chẳng sạch chẳng vừa chẳng to
+Lại biết chẳng đến chẳng đi
+Chẳng sinh chẳng diệt cây vào thiên thai
+Thiên thai mà chẳng thiên thai
+Thiên thai là ở khu vườn trước sân</p>
+<p class="stanza">Ta về vườn cũ với cỏ hoa
+Về với giao hòa giữa gió mưa
+Về nghe giọng hát chìm thiên mộng
+Một thoáng hư vô, rụng phút giây</p>
+<p class="stanza">Về biết người xưa cõi mộng xưa
+Theo nhau khỏa lấp tháng ngày qua
+Nay hay giấc mộng quen vì mộng
+Bồng lai chợt đến… hóa câu đùa</p>
+</section>
+<footer>KHU VƯỜN TÂM THỨC</footer>
+</main>
+</body>
+</html>
