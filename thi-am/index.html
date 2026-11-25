@@ -281,7 +281,9 @@ gardenButton.addEventListener('click', async () => {
     try {
 
       await gardenAudio.play();
-
+      
+sessionStorage.setItem('thiAmGarden', 'on');
+      
       gardenButton.textContent = '🍃 Khu vườn đang mở';
 
       gardenButton.classList.add('active');
@@ -295,6 +297,8 @@ gardenButton.addEventListener('click', async () => {
   } else {
 
     gardenAudio.pause();
+    
+    sessionStorage.setItem('thiAmGarden', 'off');
 
     gardenButton.textContent = '🍃 Khu vườn';
 
