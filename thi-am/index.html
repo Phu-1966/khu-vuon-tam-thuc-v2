@@ -196,9 +196,15 @@ h1{font-size:clamp(48px,9vw,105px);font-weight:400;letter-spacing:.12em;margin:0
 </a>
   <button class="sound-button" id="soundButton" type="button">
 
-  🔊 Âm thanh
+  🍃 Khu vườn
 
 </button>
+
+  <audio id="gardenAudio" loop preload="none">
+
+  <source src="Thien_Am_Khu_Vuon_Am_Thanh_70_Phan_Tram.mp3" type="audio/mpeg">
+
+</audio>
   <video
 
   autoplay
@@ -260,5 +266,44 @@ h1{font-size:clamp(48px,9vw,105px);font-weight:400;letter-spacing:.12em;margin:0
   <div class="mark">THI ÂM</div>
   <div class="line">Thơ ở lại. Giai âm đi cùng gió.</div>
 </footer>
+  <script>
+
+const gardenAudio = document.getElementById('gardenAudio');
+
+const gardenButton = document.getElementById('gardenButton');
+
+gardenAudio.volume = 0.7;
+
+gardenButton.addEventListener('click', async () => {
+
+  if (gardenAudio.paused) {
+
+    try {
+
+      await gardenAudio.play();
+
+      gardenButton.textContent = '🍃 Khu vườn đang mở';
+
+      gardenButton.classList.add('active');
+
+    } catch (e) {
+
+      gardenButton.textContent = '🍃 Khu vườn';
+
+    }
+
+  } else {
+
+    gardenAudio.pause();
+
+    gardenButton.textContent = '🍃 Khu vườn';
+
+    gardenButton.classList.remove('active');
+
+  }
+
+});
+
+</script>
 </body>
 </html>
