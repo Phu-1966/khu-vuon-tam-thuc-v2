@@ -98,6 +98,31 @@ video.addEventListener('ended', () => {
   button.setAttribute('aria-label', 'Phát nhạc');
   button.setAttribute('aria-pressed', 'false');
 });
+  video.addEventListener('play', () => {
+
+    gardenAudio.volume = 0.03;
+
+});
+
+video.addEventListener('pause', () => {
+
+    if (gardenButton.classList.contains('active')) {
+
+        gardenAudio.volume = 0.15;
+
+    }
+
+});
+
+video.addEventListener('ended', () => {
+
+    if (gardenButton.classList.contains('active')) {
+
+        gardenAudio.volume = 0.15;
+
+    }
+
+});
 </script>
 <section class="poem" aria-label="Lời thơ Một khắc trưa">
 <p class="stanza">Lá xôn xao khi nắng vàng trở gót
@@ -141,7 +166,7 @@ const gardenAudio = document.getElementById('gardenAudio');
 
 const gardenButton = document.getElementById('gardenButton');
 
-gardenAudio.volume = 0.7;
+gardenAudio.volume = 0.15;
 
 async function startGarden() {
 
