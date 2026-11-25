@@ -5,6 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#e8d9cf">
 <title>Một khắc trưa — Thi Âm</title>
+  
+
+.garden-button{
+
+  display:block;
+
+  margin:28px auto;
+
+  padding:10px 20px;
+
+  border:0;
+
+  border-radius:30px;
+
+  background:#e8e3d6;
+
+  color:#405344;
+
+  font-family:Georgia,'Times New Roman',serif;
+
+  font-size:14px;
+
+  cursor:pointer;
+
+}
+
+.garden-button.active{
+
+  background:#d5dfd0;
+
+}
 <style>
 :root { --ink:#29312c; --muted:#788078; --paper:#f7f3ee; --line:#e7dfd7; }
 * { box-sizing:border-box; }
@@ -83,6 +114,17 @@ Lá sẽ phai bên sắc màu nuối tiếc
 Một khắc trưa không gặp lại bao giờ</p>
 </section>
 
+  <button class="garden-button" id="gardenButton" type="button">
+
+  🍃 Khu vườn
+
+</button>
+
+<audio id="gardenAudio" loop preload="none">
+
+  <source src="Thien_Am_Khu_Vuon_Am_Thanh_70_Phan_Tram_25MB.mp3" type="audio/mpeg">
+
+</audio>
   <a class="thi-am-home" href="index.html">
 
   ♫ Về Thi Âm
@@ -90,5 +132,65 @@ Một khắc trưa không gặp lại bao giờ</p>
 </a>
 <footer>KHU VƯỜN TÂM THỨC</footer>
 </main>
+
+
+
+<script>
+
+const gardenAudio = document.getElementById('gardenAudio');
+
+const gardenButton = document.getElementById('gardenButton');
+
+gardenAudio.volume = 0.7;
+
+async function startGarden() {
+
+  try {
+
+    await gardenAudio.play();
+
+    gardenButton.textContent = '🍃 Khu vườn đang mở';
+
+    gardenButton.classList.add('active');
+
+    sessionStorage.setItem('thiAmGarden', 'on');
+
+  } catch (e) {
+
+    gardenButton.textContent = '🍃 Chạm để nghe';
+
+    gardenButton.classList.remove('active');
+
+  }
+
+}
+
+gardenButton.addEventListener('click', async () => {
+
+  if (gardenAudio.paused) {
+
+    await startGarden();
+
+  } else {
+
+    gardenAudio.pause();
+
+    gardenButton.textContent = '🍃 Khu vườn';
+
+    gardenButton.classList.remove('active');
+
+    sessionStorage.setItem('thiAmGarden', 'off');
+
+  }
+
+});
+
+if (sessionStorage.getItem('thiAmGarden') === 'on') {
+
+  startGarden();
+
+}
+
+</script>
 </body>
 </html>
