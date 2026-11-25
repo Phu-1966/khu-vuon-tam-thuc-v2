@@ -106,6 +106,50 @@ h1{font-size:clamp(48px,9vw,105px);font-weight:400;letter-spacing:.12em;margin:0
   }
 
 }
+  .music-icon{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  margin-left:12px;
+
+  vertical-align:middle;
+
+}
+
+.music-icon svg{
+
+  width:23px;
+
+  height:23px;
+
+  display:block;
+
+  fill:#d8b45c;
+
+  filter:drop-shadow(0 0 3px rgba(216,180,92,.35));
+
+}
+  .poem.has-music .name::after{
+
+  content:"♫";
+
+  display:inline-block;
+
+  margin-left:12px;
+
+  color:#d8c6a0;
+
+  font-size:22px;
+
+  font-weight:bold;
+
+  text-shadow:0 0 8px rgba(216,198,160,.35);
+
+}
 </style>
 </head>
 <body>
@@ -154,26 +198,26 @@ h1{font-size:clamp(48px,9vw,105px);font-weight:400;letter-spacing:.12em;margin:0
     <p>Không cần vội vàng đi hết khu vườn.<br>Chỉ cần một bài thơ chạm vào lòng,<br>và một giai điệu ở lại trong gió.</p>
   </div>
   <nav class="poems" aria-label="Danh sách 20 bài Thi Âm">
-    <a class="poem" href="khi-nui-thuc-giac.html"><span class="num">01</span><span class="name">Khi núi thức giấc</span></a>
-    <a class="poem" href="mot-khac-trua.html"><span class="num">02</span><span class="name">Một khắc trưa</span></a>
-    <a class="poem" href="thu-thay-ao.html"><span class="num">03</span><span class="name">Thu thay áo</span></a>
-    <a class="poem" href="mimosa-thon-thuc.html"><span class="num">04</span><span class="name">Mimosa thổn thức</span></a>
-    <a class="poem" href="soi-trang-mong-manh"><span class="num">05</span><span class="name">Sợi trăng mỏng manh</span></a>
-    <a class="poem" href="vuon-cu-thien-thai"><span class="num">06</span><span class="name">Vườn cũ thiên thai</span></a>
-    <a class="poem" href="loi-the-kho-kiet"><span class="num">07</span><span class="name">Lời thề khô kiệt</span></a>
-    <a class="poem" href="khan-nhuom-chieu-tim"><span class="num">08</span><span class="name">Khăn nhuộm chiều tím</span></a>
-    <a class="poem" href="tram-dung-mua-xuan"><span class="num">09</span><span class="name">Trạm dừng mùa xuân</span></a>
-    <a class="poem" href="doa-sen"><span class="num">10</span><span class="name">Đoá sen</span></a>
-    <a class="poem" href="dem-thu"><span class="num">11</span><span class="name">Đêm thu</span></a>
-    <a class="poem" href="hoa-mi-trong-nang-chieu"><span class="num">12</span><span class="name">Hoạ mi trong nắng chiều</span></a>
-    <a class="poem" href="ban-hoi"><span class="num">13</span><span class="name">Bạn hỡi</span></a>
+    <a class="poem has-music" href="khi-nui-thuc-giac.html"><span class="num">01</span><span class="name">Khi núi thức giấc</span></a>
+    <a class="poem has-music" href="mot-khac-trua.html"><span class="num">02</span><span class="name">Một khắc trưa</span></a>
+    <a class="poem has-music" href="thu-thay-ao.html"><span class="num">03</span><span class="name">Thu thay áo</span></a>
+    <a class="poem has-music" href="mimosa-thon-thuc.html"><span class="num">04</span><span class="name">Mimosa thổn thức</span></a>
+    <a class="poem has-music" href="soi-trang-mong-manh"><span class="num">05</span><span class="name">Sợi trăng mỏng manh</span></a>
+    <a class="poem has-music" href="vuon-cu-thien-thai"><span class="num">06</span><span class="name">Vườn cũ thiên thai</span></a>
+    <a class="poem has-music" href="loi-the-kho-kiet"><span class="num">07</span><span class="name">Lời thề khô kiệt</span></a>
+    <a class="poem has-music" href="khan-nhuom-chieu-tim"><span class="num">08</span><span class="name">Khăn nhuộm chiều tím</span></a>
+    <a class="poem has-music" href="tram-dung-mua-xuan"><span class="num">09</span><span class="name">Trạm dừng mùa xuân</span></a>
+    <a class="poem has-music" href="doa-sen"><span class="num">10</span><span class="name">Đoá sen</span></a>
+    <a class="poem has-music" href="dem-thu"><span class="num">11</span><span class="name">Đêm thu</span></a>
+    <a class="poem has-music" href="hoa-mi-trong-nang-chieu"><span class="num">12</span><span class="name">Hoạ mi trong nắng chiều</span></a>
+    <a class="poem has-music" href="ban-hoi"><span class="num">13</span><span class="name">Bạn hỡi</span></a>
     <a class="poem" href="sac-dep-hong-hoang"><span class="num">14</span><span class="name">Sắc đẹp hồng hoang</span></a>
     <a class="poem" href="ngu-giua-gio-ngan"><span class="num">15</span><span class="name">Ngủ giữa gió ngàn</span></a>
     <a class="poem" href="con-da-ve"><span class="num">16</span><span class="name">Con đã về</span></a>
     <a class="poem" href="cuu-canh"><span class="num">17</span><span class="name">Cứu cánh</span></a>
     <a class="poem" href="am-giai"><span class="num">18</span><span class="name">Âm giai</span></a>
     <a class="poem" href="canh-chim-hoai-vong"><span class="num">19</span><span class="name">Cánh chim hoài vọng</span></a>
-    <a class="poem" href="gia-tu-mua-ha"><span class="num">20</span><span class="name">Giã từ mùa hạ</span></a>
+    <a class="poem has-music" href="gia-tu-mua-ha"><span class="num">20</span><span class="name">Giã từ mùa hạ</span></a>
   </nav>
 </main>
 <footer class="footer">
