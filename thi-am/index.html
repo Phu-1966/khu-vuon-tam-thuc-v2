@@ -338,7 +338,7 @@ sessionStorage.setItem('thiAmGarden', 'on');
 
    THI ÂM — 5 KHUNG CẢNH KHU VƯỜN
 
-   Chuyển cảnh nhẹ nhàng, liên tục
+   Chuyển cảnh nhẹ nhàng dành cho Safari
 
 ======================================== */
 
@@ -368,27 +368,65 @@ let nextVideo = videoB;
 
 let transitioning = false;
 
-function prepareVideo(video, src) {
+let nextReady = false;
 
-  video.src = src;
+/* Chuẩn bị video kế tiếp */
 
-  video.load();
+function prepareNextVideo() {
+
+  const nextIndex =
+
+    (currentVideoIndex + 1) % thiAmVideos.length;
+
+  nextReady = false;
+
+  nextVideo.src = thiAmVideos[nextIndex];
+
+  nextVideo.load();
+
+  nextVideo.oncanplay = () => {
+
+    nextReady = true;
+
+  };
 
 }
+
+/* Bắt đầu video đầu tiên */
 
 function startThiAm() {
 
-  prepareVideo(activeVideo, thiAmVideos[currentVideoIndex]);
+  activeVideo.src = thiAmVideos[currentVideoIndex];
 
-  activeVideo.classList.add("active");
+  activeVideo.load();
 
-  activeVideo.play().catch(() => {});
+  activeVideo.loop = true;
+
+  activeVideo.oncanplay = async () => {
+
+    activeVideo.oncanplay = null;
+
+    try {
+
+      await activeVideo.play();
+
+    } catch (e) {
+
+      console.log("Video chưa thể tự phát:", e);
+
+    }
+
+  };
+
+  prepareNextVideo();
 
 }
 
-function switchThiAmVideo() {
+/* Chuyển cảnh */
 
-  if (transitioning) return;
+async function switchThiAmVideo() {
+
+  if (transitioning || !nextReady) return;
 
   transitioning = true;
 
@@ -396,19 +434,21 @@ function switchThiAmVideo() {
 
     (currentVideoIndex + 1) % thiAmVideos.length;
 
-  prepareVideo(nextVideo, thiAmVideos[nextIndex]);
+  try {
 
-  nextVideo.oncanplay = async () => {
+    await nextVideo.play();
 
-    nextVideo.oncanplay = null;
+    nextVideo.classList.add("active");
 
-    try {
+    activeVideo.classList.remove("active");
 
-      await nextVideo.play();
+    setTimeout(() => {
 
-      nextVideo.classList.add("active");
+      activeVideo.pause();
 
-      activeVideo.classList.remove("active");
+      activeVideo.currentTime = 0;
+
+      activeVideo.loop = false;
 
       const oldVideo = activeVideo;
 
@@ -418,29 +458,41 @@ function switchThiAmVideo() {
 
       currentVideoIndex = nextIndex;
 
-      transitioning = false;
-
-    } catch (error) {
+      activeVideo.loop = true;
 
       transitioning = false;
 
-    }
+      prepareNextVideo();
 
-  };
+    }, 2000);
+
+  } catch (e) {
+
+    transitioning = false;
+
+  }
 
 }
 
-/* Khi video gần hết, chuẩn bị chuyển cảnh */
+/* Theo dõi thời điểm chuyển cảnh */
 
-function monitorThiAm() {
+function checkThiAmTransition() {
 
   if (
 
-    activeVideo.duration &&
+    transitioning ||
 
-    activeVideo.currentTime >= activeVideo.duration - 2
+    !activeVideo.duration ||
 
-  ) {
+    !nextReady
+
+  ) return;
+
+  const remaining =
+
+    activeVideo.duration - activeVideo.currentTime;
+
+  if (remaining <= 2.2) {
 
     switchThiAmVideo();
 
@@ -448,7 +500,25 @@ function monitorThiAm() {
 
 }
 
-activeVideo.addEventListener("timeupdate", monitorThiAm);
+/* Gắn theo dõi cho cả hai video */
+
+videoA.addEventListener(
+
+  "timeupdate",
+
+  checkThiAmTransition
+
+);
+
+videoB.addEventListener(
+
+  "timeupdate",
+
+  checkThiAmTransition
+
+);
+
+/* Khởi động */
 
 startThiAm();
 </script>
