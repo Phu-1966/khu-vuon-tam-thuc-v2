@@ -6,35 +6,26 @@
 <meta name="theme-color" content="#152019">
 <title>Thi Âm — Nơi thơ tìm thấy tiếng nói của mình</title>
 <style>
-  .hero-video{
+<video
 
-  position:absolute;
+  autoplay
 
-  inset:0;
+  muted
 
-  width:100%;
+  loop
 
-  height:100%;
+  playsinline
 
-  object-fit:cover;
+  preload="metadata"
 
-  filter:brightness(.54) saturate(.78);
+  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"
 
-  z-index:0;
+>
 
-  opacity:0;
+  <source src="thi-am-5-khung-canh.mp4" type="video/mp4">
 
-  transition:opacity 2s ease-in-out;
-
-  pointer-events:none;
-
-}
-
-.hero-video.active{
-
-  opacity:1;
-
-}
+</video>
+  
 :root{--cream:#e9e5d7;--muted:#d0d0bf;--gold:#d8c6a0;--deep:#111b16;--green:#18231c}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--deep);color:var(--cream);font-family:Georgia,'Times New Roman',serif;font-weight:400}
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;text-align:center;padding:48px 24px}
@@ -236,21 +227,7 @@ h1{font-size:clamp(48px,9vw,105px);font-weight:400;letter-spacing:.12em;margin:0
 </audio>
   <!-- THI ÂM — VIDEO NỀN -->
 
-<video id="heroVideoA"
 
-  class="hero-video active"
-
-  autoplay muted playsinline preload="auto">
-
-</video>
-
-<video id="heroVideoB"
-
-  class="hero-video"
-
-  autoplay muted playsinline preload="auto">
-
-</video>
   
   <div class="hero-content">
     <div class="eyebrow">Một khu vườn của những thanh âm</div>
@@ -334,193 +311,6 @@ sessionStorage.setItem('thiAmGarden', 'on');
   }
 
 });
-/* ========================================
-
-   THI ÂM — 5 KHUNG CẢNH KHU VƯỜN
-
-   Chuyển cảnh nhẹ nhàng dành cho Safari
-
-======================================== */
-
-const thiAmVideos = [
-
-  "208146.mp4",
-
-  "38114-416330759.mp4",
-
-  "374493.mp4",
-
-  "187454-880665166.mp4",
-
-  "39270-422620693.mp4"
-
-];
-
-const videoA = document.getElementById("heroVideoA");
-
-const videoB = document.getElementById("heroVideoB");
-
-let currentVideoIndex = 0;
-
-let activeVideo = videoA;
-
-let nextVideo = videoB;
-
-let transitioning = false;
-
-let nextReady = false;
-
-/* Chuẩn bị video kế tiếp */
-
-function prepareNextVideo() {
-
-  const nextIndex =
-
-    (currentVideoIndex + 1) % thiAmVideos.length;
-
-  nextReady = false;
-
-  nextVideo.src = thiAmVideos[nextIndex];
-
-  nextVideo.load();
-
-  nextVideo.oncanplay = () => {
-
-    nextReady = true;
-
-  };
-
-}
-
-/* Bắt đầu video đầu tiên */
-
-function startThiAm() {
-
-  activeVideo.src = thiAmVideos[currentVideoIndex];
-
-  activeVideo.load();
-
-  activeVideo.loop = true;
-
-  activeVideo.oncanplay = async () => {
-
-    activeVideo.oncanplay = null;
-
-    try {
-
-      await activeVideo.play();
-
-    } catch (e) {
-
-      console.log("Video chưa thể tự phát:", e);
-
-    }
-
-  };
-
-  prepareNextVideo();
-
-}
-
-/* Chuyển cảnh */
-
-async function switchThiAmVideo() {
-
-  if (transitioning || !nextReady) return;
-
-  transitioning = true;
-
-  const nextIndex =
-
-    (currentVideoIndex + 1) % thiAmVideos.length;
-
-  try {
-
-    await nextVideo.play();
-
-    nextVideo.classList.add("active");
-
-    activeVideo.classList.remove("active");
-
-    setTimeout(() => {
-
-      activeVideo.pause();
-
-      activeVideo.currentTime = 0;
-
-      activeVideo.loop = false;
-
-      const oldVideo = activeVideo;
-
-      activeVideo = nextVideo;
-
-      nextVideo = oldVideo;
-
-      currentVideoIndex = nextIndex;
-
-      activeVideo.loop = true;
-
-      transitioning = false;
-
-      prepareNextVideo();
-
-    }, 2000);
-
-  } catch (e) {
-
-    transitioning = false;
-
-  }
-
-}
-
-/* Theo dõi thời điểm chuyển cảnh */
-
-function checkThiAmTransition() {
-
-  if (
-
-    transitioning ||
-
-    !activeVideo.duration ||
-
-    !nextReady
-
-  ) return;
-
-  const remaining =
-
-    activeVideo.duration - activeVideo.currentTime;
-
-  if (remaining <= 2.2) {
-
-    switchThiAmVideo();
-
-  }
-
-}
-
-/* Gắn theo dõi cho cả hai video */
-
-videoA.addEventListener(
-
-  "timeupdate",
-
-  checkThiAmTransition
-
-);
-
-videoB.addEventListener(
-
-  "timeupdate",
-
-  checkThiAmTransition
-
-);
-
-/* Khởi động */
-
-startThiAm();
 </script>
 </body>
 </html>
