@@ -6,6 +6,35 @@
 <meta name="theme-color" content="#152019">
 <title>Thi Âm — Nơi thơ tìm thấy tiếng nói của mình</title>
 <style>
+  .hero-video{
+
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  filter:brightness(.54) saturate(.78);
+
+  z-index:0;
+
+  opacity:0;
+
+  transition:opacity 2s ease-in-out;
+
+  pointer-events:none;
+
+}
+
+.hero-video.active{
+
+  opacity:1;
+
+}
 :root{--cream:#e9e5d7;--muted:#d0d0bf;--gold:#d8c6a0;--deep:#111b16;--green:#18231c}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--deep);color:var(--cream);font-family:Georgia,'Times New Roman',serif;font-weight:400}
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;text-align:center;padding:48px 24px}
@@ -205,23 +234,21 @@ h1{font-size:clamp(48px,9vw,105px);font-weight:400;letter-spacing:.12em;margin:0
   <source src="Thien_Am_Khu_Vuon_Am_Thanh_70_Phan_Tram_25MB.mp3" type="audio/mpeg">
 
 </audio>
-  <video
+  <!-- THI ÂM — VIDEO NỀN -->
 
-  autoplay
+<video id="heroVideoA"
 
-  muted
+  class="hero-video active"
 
-  loop
+  autoplay muted playsinline preload="auto">
 
-  playsinline
+</video>
 
-  preload="metadata"
+<video id="heroVideoB"
 
-  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"
+  class="hero-video"
 
->
-
-  <source src="garden-video-small.mov" type="video/mp4">
+  autoplay muted playsinline preload="auto">
 
 </video>
   
@@ -307,7 +334,123 @@ sessionStorage.setItem('thiAmGarden', 'on');
   }
 
 });
+/* ========================================
 
+   THI ÂM — 5 KHUNG CẢNH KHU VƯỜN
+
+   Chuyển cảnh nhẹ nhàng, liên tục
+
+======================================== */
+
+const thiAmVideos = [
+
+  "208146.mp4",
+
+  "38114-416330759.mp4",
+
+  "374493.mp4",
+
+  "187454-880665166.mp4",
+
+  "39270-422620693.mp4"
+
+];
+
+const videoA = document.getElementById("heroVideoA");
+
+const videoB = document.getElementById("heroVideoB");
+
+let currentVideoIndex = 0;
+
+let activeVideo = videoA;
+
+let nextVideo = videoB;
+
+let transitioning = false;
+
+function prepareVideo(video, src) {
+
+  video.src = src;
+
+  video.load();
+
+}
+
+function startThiAm() {
+
+  prepareVideo(activeVideo, thiAmVideos[currentVideoIndex]);
+
+  activeVideo.classList.add("active");
+
+  activeVideo.play().catch(() => {});
+
+}
+
+function switchThiAmVideo() {
+
+  if (transitioning) return;
+
+  transitioning = true;
+
+  const nextIndex =
+
+    (currentVideoIndex + 1) % thiAmVideos.length;
+
+  prepareVideo(nextVideo, thiAmVideos[nextIndex]);
+
+  nextVideo.oncanplay = async () => {
+
+    nextVideo.oncanplay = null;
+
+    try {
+
+      await nextVideo.play();
+
+      nextVideo.classList.add("active");
+
+      activeVideo.classList.remove("active");
+
+      const oldVideo = activeVideo;
+
+      activeVideo = nextVideo;
+
+      nextVideo = oldVideo;
+
+      currentVideoIndex = nextIndex;
+
+      transitioning = false;
+
+    } catch (error) {
+
+      transitioning = false;
+
+    }
+
+  };
+
+}
+
+/* Khi video gần hết, chuẩn bị chuyển cảnh */
+
+function monitorThiAm() {
+
+  if (
+
+    activeVideo.duration &&
+
+    activeVideo.currentTime >= activeVideo.duration - 2
+
+  ) {
+
+    switchThiAmVideo();
+
+  }
+
+}
+
+activeVideo.addEventListener("timeupdate", monitorThiAm);
+
+startThiAm();
 </script>
 </body>
 </html>
