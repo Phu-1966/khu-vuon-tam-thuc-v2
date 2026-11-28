@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#142119">
+<title>Album Thi Âm — Những ca khúc của khu vườn</title>
+<style>
+:root{--cream:#e9e5d7;--muted:#c9c9b8;--gold:#d8c6a0;--deep:#111b16;--green:#18231c;--line:rgba(225,220,200,.13)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--deep);color:var(--cream);font-family:Georgia,'Times New Roman',serif;font-weight:400}
+a{color:inherit}
+.hero{padding:78px 20px 45px;text-align:center;background:linear-gradient(180,#17251c,#111b16)}
+.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#c9b995;margin-bottom:24px}
+h1{font-size:clamp(40px,8vw,76px);font-weight:400;letter-spacing:.14em;margin:0 0 14px;color:#e5dcc7}
+.tagline{font-size:clamp(17px,2.7vw,23px);color:#d1c3a2;font-style:italic;margin:0}
+.intro{max-width:680px;margin:38px auto 0;color:#c9c9b8;font-size:16px;line-height:1.9}
+.intro p{margin:0}
+.shell{max-width:900px;margin:0 auto;padding:24px 20px 85px}
+.player-card{background:rgba(24,35,28,.9);border:1px solid rgba(216,198,160,.16);border-radius:18px;padding:15px;box-shadow:0 18px 45px rgba(0,0,0,.16)}
+.video-wrap{position:relative;background:#080d0a;border-radius:12px;overflow:hidden;aspect-ratio:16/9;display:grid;place-items:center}
+video{width:100%;height:100%;object-fit:contain;background:#080d0a;display:block}
+.now-playing{text-align:center;padding:25px 8px 18px}
+.label{font-size:10px;letter-spacing:.25em;color:#b9ad8c;text-transform:uppercase;margin-bottom:10px}
+.track-title{font-size:clamp(23px,4vw,32px);font-weight:400;color:#e5ddcb;margin:0 0 8px}
+.track-sub{font-size:14px;color:#b8b9ac;font-style:italic}
+.controls{display:flex;align-items:center;justify-content:center;gap:22px;padding:8px 0 14px}
+.control{width:46px;height:46px;border:1px solid rgba(216,198,160,.35);border-radius:50%;background:#1b2a21;color:#d7c6a0;font-size:20px;display:grid;place-items:center;cursor:pointer}
+.control.main{width:58px;height:58px;background:#d7c6a0;color:#17221b;border:0;font-size:22px}
+.control:active{transform:scale(.97)}
+.status{text-align:center;color:#aeb7aa;font-size:12px;letter-spacing:.04em;min-height:20px}
+.list-heading{margin:58px 0 18px;text-align:center;color:#b8ad8d;font-size:12px;letter-spacing:.24em;text-transform:uppercase}
+.play-all{display:block;margin:0 auto 25px;border:1px solid rgba(216,198,160,.42);border-radius:40px;background:rgba(21,32,25,.4);color:#d8c6a0;padding:10px 22px;font-family:inherit;font-size:14px;letter-spacing:.06em;cursor:pointer}
+.play-all:hover{background:rgba(216,198,160,.12);border-color:rgba(216,198,160,.75)}
+.playlist{max-width:760px;margin:0 auto}
+.track{display:flex;align-items:center;gap:20px;width:100%;text-align:left;padding:19px 5px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--cream);font-family:inherit;cursor:pointer;transition:padding .2s,color .2s}
+.track:hover{padding-left:12px;color:#e3d0a9}
+.track.active{color:#e3d0a9}
+.number{min-width:27px;font-size:12px;letter-spacing:.12em;color:#b7a786}
+.track-name{font-size:19px;line-height:1.4;flex:1}
+.track-symbol{color:#d8c6a0;font-size:18px;opacity:.7}
+.footer{padding:55px 20px 70px;text-align:center;background:#101914;color:#b7b9aa}
+.footer .mark{font-size:22px;letter-spacing:.28em;color:#d5c6a5;margin-bottom:15px}
+.footer .line{font-size:14px;font-style:italic}
+.links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
+.links a{display:inline-block;padding:9px 18px;border:1px solid rgba(216,198,160,.28);border-radius:40px;color:#c8b895;text-decoration:none;font-size:13px}
+.links a:hover{border-color:rgba(216,198,160,.7);color:#e5dcc7}
+@media(max-width:640px){.hero{padding:64px 18px 36px}.intro{font-size:15px;margin-top:30px}.shell{padding:20px 15px 65px}.player-card{padding:10px}.controls{gap:17px}.track{padding:17px 2px}.track-name{font-size:18px}.footer{padding:48px 18px 60px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track{transition:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="eyebrow">Khu Vườn Tâm Thức</div>
+  <h1>THI ÂM</h1>
+  <p class="tagline">Những khúc nhạc của khu vườn</p>
+  <div class="intro">
+    <p> Có những bài thơ không còn muốn được đọc thành lời…<br>Chúng chỉ muốn nằm yên trong âm nhạc.</p>
+  </div>
+</header>
+<main class="shell">
+  <section class="player-card" aria-label="Trình phát Album Thi Âm">
+    <div class="video-wrap">
+      <video id="albumVideo" playsinline preload="metadata"></video>
+    </div>
+    <div class="now-playing">
+      <div class="label">Đang nghe</div>
+      <h2 class="track-title" id="trackTitle">Khi núi thức giấc</h2>
+      <div class="track-sub">Để âm nhạc tiếp tục trôi…</div>
+    </div>
+    <div class="controls">
+      <button class="control" id="prevBtn" type="button" aria-label="Bài trước">⏮</button>
+      <button class="control main" id="playBtn" type="button" aria-label="Phát">▶</button>
+      <button class="control" id="nextBtn" type="button" aria-label="Bài tiếp">⏭</button>
+    </div>
+    <div class="status" id="playerStatus">Chọn một ca khúc để bắt đầu.</div>
+  </section>
+
+  <div class="list-heading">Những ca khúc</div>
+  <button class="play-all" id="playAllBtn" type="button">♫ &nbsp; Phát tất cả</button>
+  <nav class="playlist" id="playlist" aria-label="Danh sách ca khúc"></nav>
+</main>
+<footer class="footer">
+  <div class="mark">THI ÂM</div>
+  <div class="line">Thơ ở lại. Giai âm đi cùng gió.</div>
+  <div class="links">
+    <a href="index.html">← Trở về Thi Âm</a>
+    <a href="https://khuvuontamthuc.com">⌂ Về Khu Vườn</a>
+  </div>
+</footer>
+<script>
+const tracks = [
+  {title:'Khi núi thức giấc',file:'Khi-nui-thuc-giac.mp4'},
+  {title:'Một khắc trưa',file:'Mot-khac-trua.MP4'},
+  {title:'Thu thay áo',file:'Thu-thay-ao.MP4'},
+  {title:'Mimosa thổn thức',file:'Mimosa-thon-thuc.MP4'},
+  {title:'Sợi trăng mỏng manh',file:'Soi-trang-mong-manh.MP4'},
+  {title:'Vườn cũ thiên thai',file:'Vuon-cu-thien-thai.MP4'},
+  {title:'Lời thề khô kiệt',file:'Loi-the-kho-kiet-nhe.MP4'},
+  {title:'Khăn nhuộm chiều tím',file:'Khan-nhuom-chieu-tim.MP4'},
+  {title:'Trạm dừng mùa xuân',file:'Tram-dung-mua-xuan.MP4'},
+  {title:'Đoá sen',file:'Doa-sen.MP4'},
+  {title:'Đêm thu',file:'Dem-thu.MP4'},
+  {title:'Hoạ mi trong nắng chiều',file:'Hoa-mi-trong-nang-chieu.MP4'},
+  {title:'Bạn hỡi',file:'Ban-hoi.MP4'},
+  {title:'Giã từ mùa hạ',file:'Gia-tu-mua-ha.MP4'},
+  {title:'Nắng cong chiều',file:'Nang-cong-chieu-nhe.MP4'}
+];
+// MP4 files are stored in the thi-am folder beside the repository root album.html.
+const basePath='thi-am/';
+const video=document.getElementById('albumVideo'), titleEl=document.getElementById('trackTitle'), playBtn=document.getElementById('playBtn'), statusEl=document.getElementById('playerStatus'), listEl=document.getElementById('playlist');
+let current=0, playingAll=false;
+function sourceFor(i){return basePath+tracks[i].file}
+function markActive(){[...listEl.children].forEach((el,i)=>{el.classList.toggle('active',i===current);el.querySelector('.track-symbol').textContent=i===current?'♫':'';});}
+function loadTrack(i,autoplay=false){current=(i+tracks.length)%tracks.length;titleEl.textContent=tracks[current].title;video.src=sourceFor(current);video.load();markActive();playBtn.textContent='▶';statusEl.textContent=playingAll?'Album đang phát liên tục.':'Đã chọn ca khúc.';if(autoplay)playTrack();}
+async function playTrack(){try{await video.play();playBtn.textContent='Ⅱ';statusEl.textContent=playingAll?'Album đang phát liên tục.':'Đang phát ca khúc.';}catch(e){playBtn.textContent='▶';statusEl.textContent='Chạm nút phát để nghe ca khúc.';}}
+function pauseTrack(){video.pause();playBtn.textContent='▶';statusEl.textContent='Đã tạm dừng.';}
+function nextTrack(auto=false){loadTrack(current+1,auto||playingAll);}
+function previousTrack(){if(video.currentTime>3){video.currentTime=0;playTrack();}else loadTrack(current-1,playingAll);}
+tracks.forEach((track,i)=>{const btn=document.createElement('button');btn.type='button';btn.className='track';btn.innerHTML=`<span class="number">${String(i+1).padStart(2,'0')}</span><span class="track-name"></span><span class="track-symbol"></span>`;btn.querySelector('.track-name').textContent=track.title;btn.addEventListener('click',()=>{playingAll=false;loadTrack(i,true);});listEl.appendChild(btn);});
+playBtn.addEventListener('click',()=>video.paused?playTrack():pauseTrack());
+document.getElementById('prevBtn').addEventListener('click',previousTrack);
+document.getElementById('nextBtn').addEventListener('click',()=>nextTrack(true));
+document.getElementById('playAllBtn').addEventListener('click',()=>{playingAll=true;loadTrack(current,true);statusEl.textContent='Album đang phát liên tục.';});
+video.addEventListener('ended',()=>{if(current<tracks.length-1){loadTrack(current+1,true);}else if(playingAll){loadTrack(0,true);}else{playingAll=false;playBtn.textContent='▶';statusEl.textContent='Album đã kết thúc.';}});
+video.addEventListener('play',()=>playBtn.textContent='Ⅱ');video.addEventListener('pause',()=>playBtn.textContent='▶');
+loadTrack(0,false);
+</script>
+</body>
+</html>
