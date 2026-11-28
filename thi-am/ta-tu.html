@@ -1,0 +1,37 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#e8d9cf"><title>Tạ Từ — Thi Âm</title><style>
+:root{--ink:#29312c;--muted:#788078;--paper:#f7f3ee;--line:#e7dfd7}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif}main{width:min(100%,760px);margin:0 auto;padding:clamp(20px,5vw,56px) 22px 64px}header{text-align:center;margin-bottom:34px}.kicker{font-family:system-ui,sans-serif;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}h1{font-weight:normal;letter-spacing:.08em;font-size:clamp(23px,6vw,34px);margin:12px 0 8px}.subtitle{color:var(--muted);font-style:italic;font-size:15px}.cover{display:block;width:min(100%,520px);margin:26px auto 22px;border-radius:3px;box-shadow:0 12px 35px rgba(47,56,49,.10)}.player{text-align:center;margin:38px auto 46px}.play-button{width:96px;height:96px;border:0;border-radius:50%;background:#858582;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:38px/1 system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 22px rgba(47,56,49,.12)}.play-button:focus-visible{outline:3px solid #315c36;outline-offset:4px}.video{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.poem{text-align:center;font-size:clamp(18px,4.4vw,23px);line-height:1.95;letter-spacing:.01em;font-style:italic;color:#26334f}.stanza{margin:0 0 2.2em;white-space:pre-line}.stanza:last-child{margin-bottom:0}footer{margin-top:54px;text-align:center;color:var(--muted);font-size:12px;letter-spacing:.12em}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.garden-button {display:block;margin:26px auto 34px;padding:10px 20px;border:0;border-radius:30px;background:#e8e3d6;color:#405344;font-family:Georgia,'Times New Roman',serif;font-size:14px;cursor:pointer;}
+.garden-button.active {background:#d5dfd0;}
+</style></head><body><main><header><div class="kicker">Thi Âm · KHU VƯỜN TÂM THỨC</div><h1>TẠ TỪ</h1><div class="subtitle">Nơi thơ tìm thấy tiếng nói của mình</div></header>
+<button class="garden-button" id="gardenButton" type="button">🍃 Khu vườn</button>
+<audio id="gardenAudio" loop preload="none"><source src="Thien_Am_Khu_Vuon_Am_Thanh_70_Phan_Tram_25MB.mp3" type="audio/mpeg"></audio>
+
+<div class="player"><button class="play-button" id="playButton" aria-label="Phát nhạc">▶</button><video class="video" id="songVideo" playsinline preload="metadata"><source src="ta-tu.MP4" type="video/mp4"></video></div>
+<div class="poem"><div class="stanza">Ta lạc tới nơi này
+Thanh âm nhòe, lạc lối
+Nát nhàu hương cây cỏ
+Thất vọng chẳng xua ta
+Lo âu cùng hoài niệm
+Là ít nhiều tàn tro
+và quên lãng</div>
+<div class="stanza">Tạ từ
+Tạ từ hòa âm lạc
+Tạ từ những lựa chọn
+Giai điệu hương đắng ngắt
+Thành hay bại
+Cũng chỉ là cách gọi
+mà thôi</div>
+<div class="stanza">Trong cơn mê lạc lõng giữa đời
+Tôi vẫn thấy bao tốt lành ở lại
+Người yêu tôi, những gì thân ái
+Như nắng trên cánh rừng
+còn ướt đẫm sương mai</div></div>
+  
+  <a class="thi-am-home" href="index.html">
+
+  ♫ Về Thi Âm
+
+</a>
+  <footer>— Khu Vườn Tâm Thức —</footer></main>
+<script>const video=document.getElementById('songVideo'),button=document.getElementById('playButton');button.addEventListener('click',async()=>{if(video.paused){try{await video.play();button.textContent='Ⅱ';button.setAttribute('aria-label','Tạm dừng')}catch(e){button.textContent='▶'}}else{video.pause();button.textContent='▶';button.setAttribute('aria-label','Phát nhạc')}});video.addEventListener('ended',()=>{button.textContent='▶';button.setAttribute('aria-label','Phát nhạc')});const gardenAudio=document.getElementById('gardenAudio'),gardenButton=document.getElementById('gardenButton');gardenAudio.volume=0.05;gardenButton.addEventListener('click',async()=>{if(gardenAudio.paused){try{await gardenAudio.play();gardenButton.textContent='🍃 Khu vườn đang mở';gardenButton.classList.add('active')}catch(e){gardenButton.textContent='🍃 Khu vườn'}}else{gardenAudio.pause();gardenAudio.currentTime=0;gardenButton.textContent='🍃 Khu vườn';gardenButton.classList.remove('active')}});</script></body></html>
