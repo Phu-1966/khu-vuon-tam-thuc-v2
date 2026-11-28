@@ -108,7 +108,7 @@ const tracks = [
   {title:'Nắng cong chiều',file:'nang-cong-chieu-nhe.MP4'}
 ];
 // MP4 files are stored in the thi-am folder beside the repository root album.html.
-const basePath='thi-am/';
+const basePath='/thi-am/';
 const video=document.getElementById('albumVideo'), titleEl=document.getElementById('trackTitle'), playBtn=document.getElementById('playBtn'), statusEl=document.getElementById('playerStatus'), listEl=document.getElementById('playlist');
 let current=0, playingAll=false;
 function sourceFor(i){return basePath+tracks[i].file}
